@@ -1,0 +1,11 @@
+# Copy and customise; replace the administrator password privately.
+ServerName My Bannerlord Server
+GameType TeamDeathmatch
+Map mp_tdm_map_001
+CultureTeam1 vlandia
+CultureTeam2 battania
+MaxNumberOfPlayers 32
+AdminPassword REPLACE_ME
+set_automated_battle_count -1
+start_game_and_mission
+enable_automated_battle_switching

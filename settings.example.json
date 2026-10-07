@@ -1,0 +1,7 @@
+{
+  "root": "/srv/bannerlord",
+  "instances": [
+    {"name": "server1", "port": 7210, "tickrate": 60, "modules": ["Native", "Multiplayer"], "restart": "unless-stopped"},
+    {"name": "server2", "port": 7220, "tickrate": 60, "modules": ["Native", "Multiplayer"], "restart": "unless-stopped"}
+  ]
+}
