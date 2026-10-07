@@ -62,7 +62,7 @@ python remote.py --host my-server start server1
 
 `server.bat` is a Windows convenience wrapper around `remote.py`; it accepts the same arguments and pauses on failure. The SSH menu provides status, start/stop/restart, logs and backup. The game's built-in password-protected web administration panel is available on the instance's TCP port after startup; this repo does not expose a second public web dashboard.
 
-`remote.py` uploads to a unique temporary host path with SCP and removes that upload afterward. Secrets are never passed as command-line arguments by this helper. Config and mod upload require the selected instance to be stopped and take a private backup first. Upload does not automatically restart the game.
+`remote.py` uploads to a unique private temporary directory (mode 700) with SCP and removes that upload afterward. Secrets are never passed as command-line arguments by this helper. Config and mod upload require the selected instance to be stopped and take a private backup first. Upload does not automatically restart the game.
 
 ## Mods and maps
 

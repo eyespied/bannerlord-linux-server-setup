@@ -32,5 +32,6 @@ fi
 docker compose version >/dev/null
 systemctl enable --now docker
 id bl-download >/dev/null 2>&1 || useradd --system --create-home --home-dir /var/lib/bl-download --shell /usr/sbin/nologin bl-download
+[[ $(getent passwd bl-download | cut -d: -f6) == /var/lib/bl-download ]] || { echo 'Existing bl-download account has a different home; refusing to reuse it.' >&2; exit 1; }
 python3 bl.py --settings "$settings" provision
 echo 'Prepared. Add each instance token/config, then start it. See README.md.'
