@@ -192,6 +192,16 @@ def main():
         for i in s['instances']:print(i['name'],i['port'],','.join(i['modules']))
         return
     if not hasattr(os,'geteuid') or os.geteuid()!=0:raise ValueError('Host operations require sudo on Linux')
+    operation_lock=None
+    if a.action not in ('status','logs','menu'):
+        import fcntl
+        root=layout(s)
+        if a.action=='provision':
+            root.mkdir(parents=True,exist_ok=True);(root/'.bannerlord-setup-owned').touch()
+        if not (root/'.bannerlord-setup-owned').exists():raise ValueError('Run bootstrap first')
+        operation_lock=(root/'.operation-lock').open('a')
+        try:fcntl.flock(operation_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise ValueError('Another setup/update operation is running; try again after it finishes')
     if a.action=='provision':provision(s);return
     root=layout(s)
     if not (root/'.bannerlord-setup-owned').exists():raise ValueError('Run bootstrap first')
