@@ -4,6 +4,12 @@ Reusable setup and SSH operations for one or several Bannerlord dedicated server
 
 Each instance gets its own game files, module folders, configuration, token and port. Copies use filesystem reflinks where available to save space. Changes to one instance do not silently change another.
 
+## Architecture
+
+![Bannerlord Linux server architecture](docs/architecture.svg)
+
+The operator manages the host over SSH. SteamCMD supplies the base installation; each Docker instance runs from its own game folder with a separate configuration, hosting token and TCP/UDP port. The compatibility image is shared, while instance data stays on the host. Backups must also be copied off-host.
+
 ## New machine: quick start
 
 Buy an Ubuntu 24.04 **x86_64** VPS with a public IP. Set up your provider SSH access first. Disk/RAM needs depend on the number of instances, mods and players; each instance can require a full game copy when reflinks are unavailable. Keep backups off the VPS.
